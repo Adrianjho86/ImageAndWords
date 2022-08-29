@@ -96,7 +96,6 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\search-ajax.js" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +118,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Results\Results.cshtml" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
