@@ -1,0 +1,80 @@
+﻿@model  ImageAndWords.Models.UrlResponse
+
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.IsValid)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @Model.NotValidMessage
+    </div>
+}
+else
+{
+    <main>
+
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">From other website Gallery</h1>
+                    <p class="lead text-muted">The following images are only those that have been possible to track from the requested url. Only those that were found in the src:"" of the img tags, using the library <a href="https://html-agility-pack.net/">Html Agility Pack</a></p>
+                </div>
+            </div>
+        </section>
+        @*Album - Gallery*@
+        @if (!Model.ImagesUrls.Any())
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                There is no images to show
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+        }
+        else
+        {
+            <div id="gallery" class="album py-5 bg-light">
+                <div class="container">
+                    <div id="imageCollection" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        @foreach (var item in Model.ImagesUrls)
+                        {
+                            <div class="col">
+                                <div class="card shadow-sm">
+                                    <img src="@item" height="225" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            @*END Album - Gallery*@
+        }
+        @*Words Rank*@
+        @if (!Model.RankedWords.WordsInWeb.Any())
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                There is no words in this site to show
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        else
+        {
+            <div id="wordsSection" class="container bg-light">
+                <h2 class="mt-4">Top 10 Words Ranking</h2>
+                <p><strong>Total words in the site: </strong>@Model.RankedWords.TotalWords</p>
+                <p><strong>Total distincts words: </strong>@Model.RankedWords.TotalDistinct</p>
+
+                @foreach (var word in Model.RankedWords.WordsInWeb)
+                {
+                    <div class="row mb-3">
+                        <div class="col-md-4 themed-grid-col border">@word.Key</div>
+                        <div class="col-md-4 themed-grid-col border">@word.Value</div>
+                    </div>
+                }
+            </div>
+            @*Words Rank*@
+        }
+    </main>
+}
+
